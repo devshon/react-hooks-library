@@ -1,20 +1,32 @@
-import { useInput } from "./hooks/useInput";
-import { useTabs } from "./hooks/useTabs";
-import { useTitle } from "./hooks/useTitle";
-import { useClick } from "./hooks/useClick";
+import { useState, useEffect } from "react";
+
+import {
+  useInput,
+  useTabs,
+  useTitle,
+  useClick,
+  useHover,
+  useConfirm,
+  usePreventLeave,
+  useBeforeLeave,
+  useFadeIn,
+  useNetwork,
+  useScroll,
+  useFullscreen,
+  useNotification,
+  useAxios,
+} from "./hooks/index";
 
 function App() {
-  const func = () => {
-    for (let i = 0; i < 10; i++) {
-      console.log("count ", i);
-    }
-  };
-
-  const clickRef = useClick(func);
-
+  const { loading, error, data, refetch } = useAxios({
+    url: "https://cors-anywhere.herokuapp.com/https://yts.am/api/v2/list_movies.json",
+  });
+  console.log("data >>> ", JSON.stringify(data));
   return (
     <div className="App">
-      <h1 ref={clickRef}>Hi</h1>
+      <h1>{data && data.status}</h1>
+      <h2>{loading && "Loading"}</h2>
+      <button onClick={refetch}>Refetch</button>
     </div>
   );
 }
