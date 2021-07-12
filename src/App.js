@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { useInput } from "./hooks/useInput";
+import { useTabs } from "./hooks/useTabs";
+import { useTitle } from "./hooks/useTitle";
+import { useClick } from "./hooks/useClick";
 
 function App() {
+  const func = () => {
+    for (let i = 0; i < 10; i++) {
+      console.log("count ", i);
+    }
+  };
+
+  const clickRef = useClick(func);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 ref={clickRef}>Hi</h1>
     </div>
   );
 }
